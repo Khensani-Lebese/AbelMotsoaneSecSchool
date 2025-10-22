@@ -18,7 +18,7 @@ return (
 <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center font-bold">AM</div>
 <div>
 <h1 className="text-xl font-semibold">Abel Motsoane Secondary School</h1>
-<p className="text-xs text-gray-600">Excellence • Respect • Community</p>
+<p className="text-xs text-gray-600">Knowledge • is • Virtue</p>
 </div>
 </Link>
 <nav className="flex items-center gap-2">

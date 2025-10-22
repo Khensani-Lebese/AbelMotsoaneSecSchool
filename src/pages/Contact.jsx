@@ -1,28 +1,95 @@
 // src/pages/Contact.jsx
-import React from 'react'
-import { useForm } from 'react-hook-form'
+import React from "react";
+import { useForm } from "react-hook-form";
 
+export default function Contact() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-export default function Contact(){
-const { register, handleSubmit } = useForm()
-const onSubmit = data => { console.log(data); alert('Message sent (demo)') }
-return (
-<div className="max-w-xl">
-<h2>Contact Us</h2>
-<form onSubmit={handleSubmit(onSubmit)} className="mt-4 grid gap-3">
-<input {...register('name')} placeholder="Name" className="p-2 border rounded" />
-<input {...register('email')} placeholder="Email" className="p-2 border rounded" />
-<textarea {...register('message')} placeholder="Message" className="p-2 border rounded" />
-<button className="px-4 py-2 bg-secondary text-white rounded" type="submit">Send Message</button>
-</form>
+  const onSubmit = (data) => {
+    console.log(data);
+    alert("Message sent (demo)");
+  };
 
+  return (
+    <div className="max-w-6xl mx-auto py-10 px-6">
+      <h2 className="text-3xl font-bold text-secondary mb-8">Contact Us</h2>
 
-<div className="mt-6">
-<h4>School Address</h4>
-<p>123 Main Rd, Local Town</p>
-<p>Phone: +27 12 345 6789 | Email: info@abelmotsoane.school</p>
-<div className="mt-4 h-48 bg-gray-100 rounded flex items-center justify-center">Map placeholder</div>
-</div>
-</div>
-)
+      {/* TWO COLUMN LAYOUT */}
+      <div className="flex flex-col md:flex-row gap-8">
+        {/* LEFT: CONTACT FORM */}
+        <div className="md:w-1/2">
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="grid gap-4 bg-white p-6 rounded-lg shadow"
+          >
+            <input
+              {...register("name", { required: "Name is required" })}
+              placeholder="Name"
+              className="w-full p-3 border rounded focus:outline-none focus:ring-2 focus:ring-secondary"
+            />
+            {errors.name && (
+              <span className="text-red-600 text-sm">{errors.name.message}</span>
+            )}
+
+            <input
+              {...register("email", {
+                required: "Email is required",
+                pattern: {
+                  value: /^[^@\s]+@[^@\s]+\.[^@\s]+$/,
+                  message: "Invalid email address",
+                },
+              })}
+              placeholder="Email"
+              className="w-full p-3 border rounded focus:outline-none focus:ring-2 focus:ring-secondary"
+            />
+            {errors.email && (
+              <span className="text-red-600 text-sm">{errors.email.message}</span>
+            )}
+
+            <textarea
+              {...register("message", { required: "Message is required" })}
+              placeholder="Message"
+              className="w-full p-3 border rounded h-32 focus:outline-none focus:ring-2 focus:ring-secondary resize-none"
+            />
+            {errors.message && (
+              <span className="text-red-600 text-sm">{errors.message.message}</span>
+            )}
+
+            <button
+              type="submit"
+              className="px-6 py-3 bg-secondary text-white font-semibold rounded hover:bg-blue-700 transition"
+            >
+              Send Message
+            </button>
+          </form>
+        </div>
+
+        {/* RIGHT: SCHOOL INFO + MAP */}
+        <div className="md:w-1/2 space-y-4">
+          <div className="bg-gray-50 p-6 rounded-lg shadow space-y-3">
+            <h4 className="text-xl font-semibold text-secondary">School Address</h4>
+            <p>2788, Rolihlahla Avenue, Slovoville, Winterveldt, Pretoria 0198</p>
+            <p>Phone: (+27) 127077177 | Email: montshogej@gmail.com</p>
+          </div>
+
+          <div className="h-64 md:h-full rounded overflow-hidden shadow">
+            <iframe
+              title="School Location"
+              src="https://www.google.com/maps?q=2788,+Rolihlahla+Avenue,+Slovoville,+Winterveldt,+Pretoria+0198&output=embed"
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }

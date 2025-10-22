@@ -1,4 +1,4 @@
-// README.md
+
 # Abel Motsoane Secondary School - Website
 
 
