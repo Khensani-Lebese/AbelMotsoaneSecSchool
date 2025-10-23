@@ -1,6 +1,8 @@
 // src/pages/Contact.jsx
 import React from "react";
 import { useForm } from "react-hook-form";
+import { motion } from "framer-motion"; 
+import { FaPaperPlane } from "react-icons/fa"; 
 
 export default function Contact() {
   const {
@@ -14,14 +16,31 @@ export default function Contact() {
     alert("Message sent (demo)");
   };
 
-  return (
-    <div className="max-w-6xl mx-auto py-10 px-6">
-      <h2 className="text-3xl font-bold text-secondary mb-8">Contact Us</h2>
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+  };
 
-      {/* TWO COLUMN LAYOUT */}
-      <div className="flex flex-col md:flex-row gap-8">
+  return (
+    <motion.div
+      className="max-w-6xl mx-auto py-10 px-6"
+      initial="hidden"
+      animate="visible"
+      transition={{ staggerChildren: 0.2 }}
+    >
+      <motion.h2
+        variants={fadeInUp}
+        className="text-3xl font-bold text-secondary mb-8"
+      >
+        Contact Us
+      </motion.h2>
+
+      <motion.div
+        className="flex flex-col md:flex-row gap-8"
+        variants={fadeInUp}
+      >
         {/* LEFT: CONTACT FORM */}
-        <div className="md:w-1/2">
+        <motion.div className="md:w-1/2" variants={fadeInUp}>
           <form
             onSubmit={handleSubmit(onSubmit)}
             className="grid gap-4 bg-white p-6 rounded-lg shadow"
@@ -59,17 +78,18 @@ export default function Contact() {
               <span className="text-red-600 text-sm">{errors.message.message}</span>
             )}
 
+            {/* Submit button with icon */}
             <button
               type="submit"
-              className="px-6 py-3 bg-secondary text-white font-semibold rounded hover:bg-blue-700 transition"
+              className="flex items-center gap-2 px-6 py-3 bg-secondary text-white font-semibold rounded hover:bg-blue-700 transition"
             >
-              Send Message
+              <FaPaperPlane className="text-white text-lg" /> Send Message
             </button>
           </form>
-        </div>
+        </motion.div>
 
         {/* RIGHT: SCHOOL INFO + MAP */}
-        <div className="md:w-1/2 space-y-4">
+        <motion.div className="md:w-1/2 space-y-4" variants={fadeInUp}>
           <div className="bg-gray-50 p-6 rounded-lg shadow space-y-3">
             <h4 className="text-xl font-semibold text-secondary">School Address</h4>
             <p>2788, Rolihlahla Avenue, Slovoville, Winterveldt, Pretoria 0198</p>
@@ -88,8 +108,8 @@ export default function Contact() {
               referrerPolicy="no-referrer-when-downgrade"
             ></iframe>
           </div>
-        </div>
-      </div>
-    </div>
+        </motion.div>
+      </motion.div>
+    </motion.div>
   );
 }

@@ -1,6 +1,6 @@
 // src/components/Footer.jsx
 import React from "react";
-import { FaFacebookF, FaInstagram } from "react-icons/fa"; // <-- social icons
+import { FaFacebookF, FaInstagram } from "react-icons/fa"; 
 
 export default function Footer() {
   return (

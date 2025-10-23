@@ -1,17 +1,33 @@
 // src/pages/Home.jsx
 import React from "react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion"; 
+import { FaEnvelope, FaUserEdit } from "react-icons/fa";
 import matricDance from "../assets/matric-dance.jpg";
 import scienceExpo from "../assets/STEM.jpg";
 import sportsDay from "../assets/sports-day.jpg";
 import schoolBanner from "../assets/school-logo.jpg";
 
+
+const fadeInUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+};
+
 export default function Home() {
   return (
-    <div className="space-y-8">
+    <motion.div
+      className="space-y-8"
+      initial="hidden"
+      animate="visible"
+      transition={{ staggerChildren: 0.2 }}
+    >
       {/* HERO SECTION */}
-      <section className="bg-primary rounded-lg p-8 flex flex-col md:flex-row items-center gap-8">
-        <div className="flex-1 text-white">
+      <motion.section
+        variants={fadeInUp}
+        className="bg-primary rounded-lg p-8 flex flex-col md:flex-row items-center gap-8"
+      >
+        <motion.div variants={fadeInUp} className="flex-1 text-white">
           <h2 className="text-3xl font-bold">
             Welcome to Abel Motsoane Secondary School
           </h2>
@@ -22,36 +38,45 @@ export default function Home() {
           <div className="mt-4 flex gap-3">
             <Link
               to="/admissions"
-              className="px-4 py-2 rounded bg-secondary text-white hover:bg-blue-700 transition"
+              className="flex items-center gap-2 px-4 py-2 rounded bg-secondary text-white hover:bg-blue-700 transition"
             >
+              <FaUserEdit className="text-white text-lg" />
               Apply Now
             </Link>
             <Link
               to="/contact"
-              className="px-4 py-2 rounded border border-white hover:bg-white hover:text-primary transition"
+              className="flex items-center gap-2 px-4 py-2 rounded border border-white hover:bg-white hover:text-primary transition"
             >
+              <FaEnvelope className="text-white group-hover:text-primary text-lg" />
               Contact Us
             </Link>
           </div>
-        </div>
+        </motion.div>
 
-        <div className="w-full md:w-1/3 h-48 bg-white rounded-md overflow-hidden flex items-center justify-center">
+        <motion.div
+          variants={fadeInUp}
+          className="w-full md:w-1/3 h-48 bg-white rounded-md overflow-hidden flex items-center justify-center"
+        >
           <img
-            src= {schoolBanner}
+            src={schoolBanner}
             alt="School banner"
             className="object-contain w-full h-full"
           />
-        </div>
-      </section>
+        </motion.div>
+      </motion.section>
 
       {/* EVENTS SECTION */}
-      <section>
+      <motion.section variants={fadeInUp}>
         <h3 className="text-2xl font-semibold text-secondary">
           Latest News & Events
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
           {/* Event 1 */}
-          <article className="p-4 border rounded-lg shadow-sm hover:shadow-md transition bg-white">
+          <motion.article
+            variants={fadeInUp}
+            whileHover={{ scale: 1.03 }}
+            className="p-4 border rounded-lg shadow-sm hover:shadow-md transition bg-white"
+          >
             <img
               src={matricDance}
               alt="Matric Dance 2025"
@@ -64,10 +89,14 @@ export default function Home() {
               A night to remember! Our Matric class of 2025 celebrated their
               achievements in style.
             </p>
-          </article>
+          </motion.article>
 
           {/* Event 2 */}
-          <article className="p-4 border rounded-lg shadow-sm hover:shadow-md transition bg-white">
+          <motion.article
+            variants={fadeInUp}
+            whileHover={{ scale: 1.03 }}
+            className="p-4 border rounded-lg shadow-sm hover:shadow-md transition bg-white"
+          >
             <img
               src={scienceExpo}
               alt="Science Expo"
@@ -80,10 +109,14 @@ export default function Home() {
               Learners showcased creative experiments and projects, inspiring a
               love for STEM innovation.
             </p>
-          </article>
+          </motion.article>
 
           {/* Event 3 */}
-          <article className="p-4 border rounded-lg shadow-sm hover:shadow-md transition bg-white">
+          <motion.article
+            variants={fadeInUp}
+            whileHover={{ scale: 1.03 }}
+            className="p-4 border rounded-lg shadow-sm hover:shadow-md transition bg-white"
+          >
             <img
               src={sportsDay}
               alt="Sports Day"
@@ -94,9 +127,9 @@ export default function Home() {
               Students and teachers came together for a fun day filled with
               athletics, teamwork, and spirit.
             </p>
-          </article>
+          </motion.article>
         </div>
-      </section>
-    </div>
+      </motion.section>
+    </motion.div>
   );
 }

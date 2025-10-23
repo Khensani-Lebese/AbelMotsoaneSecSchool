@@ -9,6 +9,7 @@ import Gallery from './pages/Gallery'
 import Contact from './pages/Contact'
 import Header from './components/Header'
 import Footer from './components/Footer'
+import './App.css';
 
 
 export default function App(){
