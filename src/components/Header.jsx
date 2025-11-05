@@ -1,7 +1,7 @@
 // src/components/Header.jsx
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import logo from '../assets/school-logo.JPG'; 
+import logo from '../assets/school-logo.jpg'; 
 
 const NavItem = ({ to, children }) => (
   <NavLink
