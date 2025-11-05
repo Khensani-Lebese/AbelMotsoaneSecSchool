@@ -22,7 +22,5 @@ Starter site built with React (Vite) + Tailwind CSS.
 ## Deploy
 - Push to GitHub and connect to Vercel or Netlify (select the repo, set build command `npm run build`, publish directory `dist`).
 
-
-## Notes
-- Replace placeholder images and copy.
-- To add dark mode toggle, integrate `useState` + CSS classes.
+## Deployed link
+https://abelmotsoane.netlify.app
