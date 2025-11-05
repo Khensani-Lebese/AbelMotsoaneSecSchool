@@ -23,14 +23,14 @@ export default function Contact() {
 
   return (
     <motion.div
-      className="max-w-6xl mx-auto py-10 px-6"
+      className="max-w-6xl mx-auto py-10 px-4 sm:px-6"
       initial="hidden"
       animate="visible"
       transition={{ staggerChildren: 0.2 }}
     >
       <motion.h2
         variants={fadeInUp}
-        className="text-3xl font-bold text-secondary mb-8"
+        className="text-3xl sm:text-4xl font-bold text-secondary mb-8 text-center"
       >
         Contact Us
       </motion.h2>
@@ -45,46 +45,53 @@ export default function Contact() {
             onSubmit={handleSubmit(onSubmit)}
             className="grid gap-4 bg-white p-6 rounded-lg shadow"
           >
-            <input
-              {...register("name", { required: "Name is required" })}
-              placeholder="Name"
-              className="w-full p-3 border rounded focus:outline-none focus:ring-2 focus:ring-secondary"
-            />
-            {errors.name && (
-              <span className="text-red-600 text-sm">{errors.name.message}</span>
-            )}
+            <motion.div variants={fadeInUp}>
+              <input
+                {...register("name", { required: "Name is required" })}
+                placeholder="Name"
+                className="w-full p-3 border rounded focus:outline-none focus:ring-2 focus:ring-secondary text-sm sm:text-base"
+              />
+              {errors.name && (
+                <span className="text-red-600 text-sm">{errors.name.message}</span>
+              )}
+            </motion.div>
 
-            <input
-              {...register("email", {
-                required: "Email is required",
-                pattern: {
-                  value: /^[^@\s]+@[^@\s]+\.[^@\s]+$/,
-                  message: "Invalid email address",
-                },
-              })}
-              placeholder="Email"
-              className="w-full p-3 border rounded focus:outline-none focus:ring-2 focus:ring-secondary"
-            />
-            {errors.email && (
-              <span className="text-red-600 text-sm">{errors.email.message}</span>
-            )}
+            <motion.div variants={fadeInUp}>
+              <input
+                {...register("email", {
+                  required: "Email is required",
+                  pattern: {
+                    value: /^[^@\s]+@[^@\s]+\.[^@\s]+$/,
+                    message: "Invalid email address",
+                  },
+                })}
+                placeholder="Email"
+                className="w-full p-3 border rounded focus:outline-none focus:ring-2 focus:ring-secondary text-sm sm:text-base"
+              />
+              {errors.email && (
+                <span className="text-red-600 text-sm">{errors.email.message}</span>
+              )}
+            </motion.div>
 
-            <textarea
-              {...register("message", { required: "Message is required" })}
-              placeholder="Message"
-              className="w-full p-3 border rounded h-32 focus:outline-none focus:ring-2 focus:ring-secondary resize-none"
-            />
-            {errors.message && (
-              <span className="text-red-600 text-sm">{errors.message.message}</span>
-            )}
+            <motion.div variants={fadeInUp}>
+              <textarea
+                {...register("message", { required: "Message is required" })}
+                placeholder="Message"
+                className="w-full p-3 border rounded h-32 focus:outline-none focus:ring-2 focus:ring-secondary resize-none text-sm sm:text-base"
+              />
+              {errors.message && (
+                <span className="text-red-600 text-sm">{errors.message.message}</span>
+              )}
+            </motion.div>
 
             {/* Submit button with icon */}
-            <button
+            <motion.button
               type="submit"
-              className="flex items-center gap-2 px-6 py-3 bg-secondary text-white font-semibold rounded hover:bg-blue-700 transition"
+              className="flex items-center justify-center gap-2 px-6 py-3 bg-secondary text-white font-semibold rounded hover:bg-blue-700 transition text-sm sm:text-base w-full md:w-auto"
+              variants={fadeInUp}
             >
               <FaPaperPlane className="text-white text-lg" /> Send Message
-            </button>
+            </motion.button>
           </form>
         </motion.div>
 

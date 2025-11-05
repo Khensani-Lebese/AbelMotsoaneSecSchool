@@ -1,7 +1,7 @@
-// src/components/Header.jsx
 import React, { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { FiMenu, FiX } from "react-icons/fi";
+import { motion, AnimatePresence } from "framer-motion";
 import logo from '../assets/school-logo.jpg';
 
 const NavItem = ({ to, children, onClick }) => (
@@ -20,6 +20,13 @@ const NavItem = ({ to, children, onClick }) => (
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+
+  // Animation variants for the mobile menu
+  const menuVariants = {
+    hidden: { opacity: 0, height: 0 },
+    visible: { opacity: 1, height: 'auto', transition: { duration: 0.3, ease: "easeOut" } },
+    exit: { opacity: 0, height: 0, transition: { duration: 0.2, ease: "easeIn" } },
+  };
 
   return (
     <header className="bg-white shadow fixed w-full z-50">
@@ -59,17 +66,25 @@ export default function Header() {
         </nav>
       </div>
 
-      {/* Mobile Dropdown */}
-      {menuOpen && (
-        <div className="md:hidden bg-white shadow px-4 py-3 space-y-1">
-          <NavItem to="/" onClick={() => setMenuOpen(false)}>Home</NavItem>
-          <NavItem to="/about" onClick={() => setMenuOpen(false)}>About</NavItem>
-          <NavItem to="/academics" onClick={() => setMenuOpen(false)}>Academics</NavItem>
-          <NavItem to="/admissions" onClick={() => setMenuOpen(false)}>Admissions</NavItem>
-          <NavItem to="/gallery" onClick={() => setMenuOpen(false)}>Gallery</NavItem>
-          <NavItem to="/contact" onClick={() => setMenuOpen(false)}>Contact</NavItem>
-        </div>
-      )}
+      {/* Mobile Dropdown with animation */}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            className="md:hidden bg-white shadow px-4 py-3 space-y-1 overflow-hidden"
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            variants={menuVariants}
+          >
+            <NavItem to="/" onClick={() => setMenuOpen(false)}>Home</NavItem>
+            <NavItem to="/about" onClick={() => setMenuOpen(false)}>About</NavItem>
+            <NavItem to="/academics" onClick={() => setMenuOpen(false)}>Academics</NavItem>
+            <NavItem to="/admissions" onClick={() => setMenuOpen(false)}>Admissions</NavItem>
+            <NavItem to="/gallery" onClick={() => setMenuOpen(false)}>Gallery</NavItem>
+            <NavItem to="/contact" onClick={() => setMenuOpen(false)}>Contact</NavItem>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }

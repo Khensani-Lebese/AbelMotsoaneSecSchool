@@ -14,7 +14,6 @@ import img8 from "../assets/gallery8.jpg";
 export default function Gallery() {
   const images = [img1, img2, img3, img4, img5, img6, img7, img8];
 
-  
   const fadeInUp = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
@@ -22,24 +21,28 @@ export default function Gallery() {
 
   return (
     <motion.div
-      className="max-w-6xl mx-auto py-10 px-6"
+      className="max-w-6xl mx-auto py-10 px-4 sm:px-6"
       initial="hidden"
       animate="visible"
       transition={{ staggerChildren: 0.1 }}
     >
       <motion.h2
         variants={fadeInUp}
-        className="text-3xl font-bold text-secondary mb-6"
+        className="text-3xl sm:text-4xl font-bold text-secondary mb-6 text-center"
       >
         Gallery
       </motion.h2>
 
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+      <motion.div
+        className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3"
+        variants={fadeInUp}
+      >
         {images.map((img, i) => (
           <motion.div
             key={i}
-            className="h-32 rounded overflow-hidden shadow hover:shadow-lg transition"
+            className="h-32 sm:h-40 md:h-48 rounded overflow-hidden shadow hover:shadow-lg transition-transform duration-300"
             variants={fadeInUp}
+            whileHover={{ scale: 1.05 }}
           >
             <img
               src={img}
@@ -48,7 +51,7 @@ export default function Gallery() {
             />
           </motion.div>
         ))}
-      </div>
+      </motion.div>
     </motion.div>
   );
 }
